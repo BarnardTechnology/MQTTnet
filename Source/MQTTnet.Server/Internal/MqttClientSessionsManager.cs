@@ -36,7 +36,7 @@ public sealed class MqttClientSessionsManager : ISubscriptionChangedNotification
     {
         ArgumentNullException.ThrowIfNull(logger);
 
-        _logger = logger.WithSource(nameof(MqttClientSessionsManager));
+        _logger = logger.WithSource(nameof(MqttClientSessionsManager), nameof(MqttClientSessionsManager));
         _rootLogger = logger;
 
         _options = options ?? throw new ArgumentNullException(nameof(options));

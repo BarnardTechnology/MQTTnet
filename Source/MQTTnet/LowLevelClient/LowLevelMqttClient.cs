@@ -28,7 +28,7 @@ namespace MQTTnet.LowLevelClient
             _clientAdapterFactory = clientAdapterFactory ?? throw new ArgumentNullException(nameof(clientAdapterFactory));
 
             _rootLogger = logger ?? throw new ArgumentNullException(nameof(logger));
-            _logger = logger.WithSource(nameof(LowLevelMqttClient));
+            _logger = logger.WithSource(nameof(LowLevelMqttClient), nameof(LowLevelMqttClient));
         }
 
         public event Func<InspectMqttPacketEventArgs, Task> InspectPacketAsync

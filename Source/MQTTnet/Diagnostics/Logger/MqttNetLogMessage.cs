@@ -16,6 +16,8 @@ namespace MQTTnet.Diagnostics.Logger
 
         public string Source { get; set; }
 
+        public string ClientId { get; set; }
+
         public MqttNetLogLevel Level { get; set; }
 
         public string Message { get; set; }

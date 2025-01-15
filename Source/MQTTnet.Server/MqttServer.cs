@@ -36,7 +36,7 @@ public class MqttServer : Disposable
         _adapters = adapters.ToList();
 
         _rootLogger = logger ?? throw new ArgumentNullException(nameof(logger));
-        _logger = logger.WithSource(nameof(MqttServer));
+        _logger = logger.WithSource(nameof(MqttServer), "");
 
         _retainedMessagesManager = new MqttRetainedMessagesManager(_eventContainer, _rootLogger);
         _clientSessionsManager = new MqttClientSessionsManager(options, _retainedMessagesManager, _eventContainer, _rootLogger);

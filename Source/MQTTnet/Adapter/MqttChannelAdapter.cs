@@ -41,7 +41,7 @@ public sealed class MqttChannelAdapter : Disposable, IMqttChannelAdapter
 
         ArgumentNullException.ThrowIfNull(logger);
 
-        _logger = logger.WithSource(nameof(MqttChannelAdapter));
+        _logger = logger.WithSource(nameof(MqttChannelAdapter), nameof(MqttChannelAdapter));
     }
 
     public bool AllowPacketFragmentation { get; set; } = true;

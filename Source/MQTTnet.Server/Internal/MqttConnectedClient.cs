@@ -51,7 +51,7 @@ public sealed class MqttConnectedClient : IDisposable
 
         ArgumentNullException.ThrowIfNull(logger);
 
-        _logger = logger.WithSource(nameof(MqttConnectedClient));
+        _logger = logger.WithSource(nameof(MqttConnectedClient), ConnectPacket.ClientId);
     }
 
     public IMqttChannelAdapter ChannelAdapter { get; }

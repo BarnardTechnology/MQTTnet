@@ -211,7 +211,14 @@ namespace MQTTnet.Diagnostics.Logger
         {
             ArgumentNullException.ThrowIfNull(logger);
 
-            return new MqttNetSourceLogger(logger, source);
+            return new MqttNetSourceLogger(logger, source, source);
+        }
+
+        public static MqttNetSourceLogger WithSource(this IMqttNetLogger logger, string source, string clientId)
+        {
+            ArgumentNullException.ThrowIfNull(logger);
+
+            return new MqttNetSourceLogger(logger, source, clientId);
         }
     }
 }

@@ -22,7 +22,7 @@ namespace MQTTnet.Diagnostics.Logger
 
         public string LogId { get; }
 
-        public void Publish(MqttNetLogLevel level, string source, string message, object[] parameters, Exception exception)
+        public void Publish(MqttNetLogLevel level, string source, string clientId, string message, object[] parameters, Exception exception)
         {
             var eventHandler = LogMessagePublished;
             if (eventHandler == null)
@@ -52,6 +52,7 @@ namespace MQTTnet.Diagnostics.Logger
                 LogId = LogId,
                 Timestamp = DateTime.UtcNow,
                 Source = source,
+                ClientId = clientId,
                 ThreadId = Environment.CurrentManagedThreadId,
                 Level = level,
                 Message = message,

@@ -85,7 +85,7 @@ public static class Logger_Samples
     {
         public bool IsEnabled { get; set; } = true;
 
-        public void Publish(MqttNetLogLevel logLevel, string source, string message, object[] parameters, Exception exception)
+        public void Publish(MqttNetLogLevel logLevel, string source, string clientId, string message, object[] parameters, Exception exception)
         {
             // Forward the log message to other loggers.
             // 1. Convert log level to matching log level in target logger.

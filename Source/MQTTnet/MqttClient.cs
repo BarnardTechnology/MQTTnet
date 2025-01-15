@@ -54,7 +54,7 @@ public sealed class MqttClient : Disposable, IMqttClient
     {
         _adapterFactory = channelFactory ?? throw new ArgumentNullException(nameof(channelFactory));
         _rootLogger = logger ?? throw new ArgumentNullException(nameof(logger));
-        _logger = logger.WithSource(nameof(MqttClient));
+        _logger = logger.WithSource(nameof(MqttClient), nameof(MqttClient));
     }
 
     public event Func<MqttApplicationMessageReceivedEventArgs, Task> ApplicationMessageReceivedAsync

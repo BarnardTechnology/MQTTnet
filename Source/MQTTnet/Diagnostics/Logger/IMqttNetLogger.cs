@@ -10,6 +10,6 @@ namespace MQTTnet.Diagnostics.Logger
     {
         bool IsEnabled { get; }
         
-        void Publish(MqttNetLogLevel logLevel, string source, string message, object[] parameters, Exception exception);
+        void Publish(MqttNetLogLevel logLevel, string source, string clientId, string message, object[] parameters, Exception exception);
     }
 }

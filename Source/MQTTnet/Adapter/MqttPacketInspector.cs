@@ -25,7 +25,7 @@ public sealed class MqttPacketInspector
 
         ArgumentNullException.ThrowIfNull(logger);
 
-        _logger = logger.WithSource(nameof(MqttPacketInspector));
+        _logger = logger.WithSource(nameof(MqttPacketInspector), nameof(MqttPacketInspector));
     }
 
     public void BeginReceivePacket()
