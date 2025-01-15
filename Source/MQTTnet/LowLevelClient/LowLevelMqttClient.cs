@@ -58,7 +58,7 @@ namespace MQTTnet.LowLevelClient
 
             try
             {
-                _logger.Verbose("Trying to connect with server '{0}'", options.ChannelOptions);
+                _logger.Verbose("LowLevelMqttClient", "Trying to connect with server '{0}'", options.ChannelOptions);
                 await newAdapter.ConnectAsync(cancellationToken).ConfigureAwait(false);
                 _logger.Verbose("Connection with server established");
             }
@@ -106,7 +106,7 @@ namespace MQTTnet.LowLevelClient
 
             try
             {
-                var receivedPacket = await adapter.ReceivePacketAsync(cancellationToken).ConfigureAwait(false);
+                var receivedPacket = await adapter.ReceivePacketAsync(cancellationToken, "LowLevelMqttClient").ConfigureAwait(false);
                 if (receivedPacket == null)
                 {
                     // Graceful socket close.

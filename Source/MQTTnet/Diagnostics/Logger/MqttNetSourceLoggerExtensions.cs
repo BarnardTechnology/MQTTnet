@@ -19,7 +19,7 @@ namespace MQTTnet.Diagnostics.Logger
                 return;
             }
 
-            logger.Publish(MqttNetLogLevel.Error, message, new object[] { parameter1 }, exception);
+            logger.Publish(MqttNetLogLevel.Error, "MqttNetSourceLoggerExtensions", message, new object[] { parameter1 }, exception);
         }
 
         public static void Error<TParameter1, TParameter2>(this MqttNetSourceLogger logger, Exception exception, string message, TParameter1 parameter1, TParameter2 parameter2)
@@ -29,7 +29,7 @@ namespace MQTTnet.Diagnostics.Logger
                 return;
             }
 
-            logger.Publish(MqttNetLogLevel.Error, message, new object[] { parameter1, parameter2 }, exception);
+            logger.Publish(MqttNetLogLevel.Error, "MqttNetSourceLoggerExtensions", message, new object[] { parameter1, parameter2 }, exception);
         }
 
         public static void Error(this MqttNetSourceLogger logger, Exception exception, string message)
@@ -39,7 +39,7 @@ namespace MQTTnet.Diagnostics.Logger
                 return;
             }
 
-            logger.Publish(MqttNetLogLevel.Error, message, null, exception);
+            logger.Publish(MqttNetLogLevel.Error, "MqttNetSourceLoggerExtensions", message, null, exception);
         }
 
         public static void Error(this MqttNetSourceLogger logger, string message)
@@ -49,7 +49,7 @@ namespace MQTTnet.Diagnostics.Logger
                 return;
             }
 
-            logger.Publish(MqttNetLogLevel.Error, message, null, null);
+            logger.Publish(MqttNetLogLevel.Error, "MqttNetSourceLoggerExtensions", message, null, null);
         }
 
         public static void Info<TParameter1>(this MqttNetSourceLogger logger, string message, TParameter1 parameter1)
@@ -59,7 +59,7 @@ namespace MQTTnet.Diagnostics.Logger
                 return;
             }
 
-            logger.Publish(MqttNetLogLevel.Info, message, new object[] { parameter1 }, null);
+            logger.Publish(MqttNetLogLevel.Info, "MqttNetSourceLoggerExtensions", message, new object[] { parameter1 }, null);
         }
 
         public static void Info<TParameter1, TParameter2>(this MqttNetSourceLogger logger, string message, TParameter1 parameter1, TParameter2 parameter2)
@@ -69,7 +69,7 @@ namespace MQTTnet.Diagnostics.Logger
                 return;
             }
 
-            logger.Publish(MqttNetLogLevel.Info, message, new object[] { parameter1, parameter2 }, null);
+            logger.Publish(MqttNetLogLevel.Info, "MqttNetSourceLoggerExtensions", message, new object[] { parameter1, parameter2 }, null);
         }
 
         public static void Info(this MqttNetSourceLogger logger, string message)
@@ -79,7 +79,7 @@ namespace MQTTnet.Diagnostics.Logger
                 return;
             }
 
-            logger.Publish(MqttNetLogLevel.Info, message, null, null);
+            logger.Publish(MqttNetLogLevel.Info, "MqttNetSourceLoggerExtensions", message, null, null);
         }
 
         public static void Publish<TParameter1>(this MqttNetSourceLogger logger, MqttNetLogLevel logLevel, Exception exception, string message, TParameter1 parameter1)
@@ -89,7 +89,7 @@ namespace MQTTnet.Diagnostics.Logger
                 return;
             }
 
-            logger.Publish(logLevel, message, new object[] { parameter1 }, exception);
+            logger.Publish(logLevel, "MqttNetSourceLoggerExtensions", message, new object[] { parameter1 }, exception);
         }
 
         public static void Publish<TParameter1, TParameter2>(this MqttNetSourceLogger logger, MqttNetLogLevel logLevel, Exception exception, string message, TParameter1 parameter1, TParameter2 parameter2)
@@ -99,32 +99,33 @@ namespace MQTTnet.Diagnostics.Logger
                 return;
             }
 
-            logger.Publish(logLevel, message, new object[] { parameter1, parameter2 }, exception);
+            logger.Publish(logLevel, "MqttNetSourceLoggerExtensions", message, new object[] { parameter1, parameter2 }, exception);
         }
 
-        public static void Verbose<TParameter1>(this MqttNetSourceLogger logger, string message, TParameter1 parameter1)
+        public static void Verbose<TParameter1>(this MqttNetSourceLogger logger, string fromClientId, string message, TParameter1 parameter1)
         {
             if (!logger.IsEnabled)
             {
                 return;
             }
 
-            logger.Publish(MqttNetLogLevel.Verbose, message, new object[] { parameter1 }, null);
+            logger.Publish(MqttNetLogLevel.Verbose, fromClientId, message, new object[] { parameter1 }, null);
         }
 
-        public static void Verbose<TParameter1, TParameter2>(this MqttNetSourceLogger logger, string message, TParameter1 parameter1, TParameter2 parameter2)
+        public static void Verbose<TParameter1, TParameter2>(this MqttNetSourceLogger logger, string fromClientId, string message, TParameter1 parameter1, TParameter2 parameter2)
         {
             if (!logger.IsEnabled)
             {
                 return;
             }
 
-            logger.Publish(MqttNetLogLevel.Verbose, message, new object[] { parameter1, parameter2 }, null);
+            logger.Publish(MqttNetLogLevel.Verbose, fromClientId, message, new object[] { parameter1, parameter2 }, null);
         }
 
         public static void Verbose<TParameter1, TParameter2, TParameter3>(
             this MqttNetSourceLogger logger,
             string message,
+            string fromClientId,
             TParameter1 parameter1,
             TParameter2 parameter2,
             TParameter3 parameter3)
@@ -134,7 +135,7 @@ namespace MQTTnet.Diagnostics.Logger
                 return;
             }
 
-            logger.Publish(MqttNetLogLevel.Verbose, message, new object[] { parameter1, parameter2, parameter3 }, null);
+            logger.Publish(MqttNetLogLevel.Verbose, fromClientId, message, new object[] { parameter1, parameter2, parameter3 }, null);
         }
 
         public static void Verbose(this MqttNetSourceLogger logger, string message)
@@ -144,7 +145,7 @@ namespace MQTTnet.Diagnostics.Logger
                 return;
             }
 
-            logger.Publish(MqttNetLogLevel.Verbose, message, null, null);
+            logger.Publish(MqttNetLogLevel.Verbose, "MqttNetSourceLoggerExtensions", message, null, null);
         }
 
         public static void Warning<TParameter1>(this MqttNetSourceLogger logger, Exception exception, string message, TParameter1 parameter1)
@@ -154,7 +155,7 @@ namespace MQTTnet.Diagnostics.Logger
                 return;
             }
 
-            logger.Publish(MqttNetLogLevel.Warning, message, new object[] { parameter1 }, exception);
+            logger.Publish(MqttNetLogLevel.Warning, "MqttNetSourceLoggerExtensions", message, new object[] { parameter1 }, exception);
         }
 
         public static void Warning<TParameter1, TParameter2>(this MqttNetSourceLogger logger, Exception exception, string message, TParameter1 parameter1, TParameter2 parameter2)
@@ -164,7 +165,7 @@ namespace MQTTnet.Diagnostics.Logger
                 return;
             }
 
-            logger.Publish(MqttNetLogLevel.Warning, message, new object[] { parameter1, parameter2 }, exception);
+            logger.Publish(MqttNetLogLevel.Warning, "MqttNetSourceLoggerExtensions", message, new object[] { parameter1, parameter2 }, exception);
         }
 
         public static void Warning(this MqttNetSourceLogger logger, Exception exception, string message)
@@ -174,7 +175,7 @@ namespace MQTTnet.Diagnostics.Logger
                 return;
             }
 
-            logger.Publish(MqttNetLogLevel.Warning, message, null, exception);
+            logger.Publish(MqttNetLogLevel.Warning, "MqttNetSourceLoggerExtensions", message, null, exception);
         }
 
         public static void Warning<TParameter1>(this MqttNetSourceLogger logger, string message, TParameter1 parameter1)
@@ -184,7 +185,7 @@ namespace MQTTnet.Diagnostics.Logger
                 return;
             }
 
-            logger.Publish(MqttNetLogLevel.Warning, message, new object[] { parameter1 }, null);
+            logger.Publish(MqttNetLogLevel.Warning, "MqttNetSourceLoggerExtensions", message, new object[] { parameter1 }, null);
         }
 
         public static void Warning<TParameter1, TParameter2>(this MqttNetSourceLogger logger, string message, TParameter1 parameter1, TParameter2 parameter2)
@@ -194,7 +195,7 @@ namespace MQTTnet.Diagnostics.Logger
                 return;
             }
 
-            logger.Publish(MqttNetLogLevel.Warning, message, new object[] { parameter1, parameter2 }, null);
+            logger.Publish(MqttNetLogLevel.Warning, "MqttNetSourceLoggerExtensions", message, new object[] { parameter1, parameter2 }, null);
         }
 
         public static void Warning(this MqttNetSourceLogger logger, string message)
@@ -204,7 +205,7 @@ namespace MQTTnet.Diagnostics.Logger
                 return;
             }
 
-            logger.Publish(MqttNetLogLevel.Warning, message, null, null);
+            logger.Publish(MqttNetLogLevel.Warning, "MqttNetSourceLoggerExtensions", message, null, null);
         }
 
         public static MqttNetSourceLogger WithSource(this IMqttNetLogger logger, string source)

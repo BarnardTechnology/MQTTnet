@@ -365,7 +365,7 @@ public sealed class MqttConnectedClient : IDisposable
             {
                 await Task.Yield();
 
-                currentPacket = await ChannelAdapter.ReceivePacketAsync(cancellationToken).ConfigureAwait(false);
+                currentPacket = await ChannelAdapter.ReceivePacketAsync(cancellationToken, this.Id).ConfigureAwait(false);
                 if (currentPacket == null)
                 {
                     return;

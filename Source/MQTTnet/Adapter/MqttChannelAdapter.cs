@@ -40,7 +40,6 @@ public sealed class MqttChannelAdapter : Disposable, IMqttChannelAdapter
         PacketFormatterAdapter = packetFormatterAdapter ?? throw new ArgumentNullException(nameof(packetFormatterAdapter));
 
         ArgumentNullException.ThrowIfNull(logger);
-
         _logger = logger.WithSource(nameof(MqttChannelAdapter), nameof(MqttChannelAdapter));
     }
 
@@ -133,7 +132,7 @@ public sealed class MqttChannelAdapter : Disposable, IMqttChannelAdapter
         }
     }
 
-    public async Task<MqttPacket> ReceivePacketAsync(CancellationToken cancellationToken)
+    public async Task<MqttPacket> ReceivePacketAsync(CancellationToken cancellationToken, string fromClientId)
     {
         cancellationToken.ThrowIfCancellationRequested();
         ThrowIfDisposed();
@@ -177,7 +176,7 @@ public sealed class MqttChannelAdapter : Disposable, IMqttChannelAdapter
                 throw new MqttProtocolViolationException("Received malformed packet.");
             }
 
-            _logger.Verbose("RX ({0} bytes) <<< {1}", receivedPacket.TotalLength, packet);
+            _logger.Verbose(fromClientId, "RX ({0} bytes) <<< {1}", receivedPacket.TotalLength, packet);
 
             return packet;
         }
@@ -225,7 +224,7 @@ public sealed class MqttChannelAdapter : Disposable, IMqttChannelAdapter
                     await localPacketInspector.BeginSendPacket(packetBuffer).ConfigureAwait(false);
                 }
 
-                _logger.Verbose("TX ({0} bytes) >>> {1}", packetBuffer.Length, packet);
+                _logger.Verbose("SendPacketAsync", "TX ({0} bytes) >>> {1}", packetBuffer.Length, packet);
 
                 if (packetBuffer.Payload.Length == 0 || !AllowPacketFragmentation)
                 {

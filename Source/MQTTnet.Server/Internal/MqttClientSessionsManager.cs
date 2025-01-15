@@ -63,7 +63,7 @@ public sealed class MqttClientSessionsManager : ISubscriptionChangedNotification
 
     public async Task DeleteSessionAsync(string clientId)
     {
-        _logger.Verbose("Deleting session for client '{0}'.", clientId);
+        _logger.Verbose(clientId, "Deleting session for client '{0}'.", clientId);
 
         MqttConnectedClient connection;
         lock (_clients)
@@ -112,7 +112,7 @@ public sealed class MqttClientSessionsManager : ISubscriptionChangedNotification
 
         session?.Dispose();
 
-        _logger.Verbose("Session of client '{0}' deleted", clientId);
+        _logger.Verbose(clientId, "Session of client '{0}' deleted", clientId);
     }
 
     public async Task<DispatchApplicationMessageResult> DispatchApplicationMessage(
@@ -563,13 +563,13 @@ public sealed class MqttClientSessionsManager : ISubscriptionChangedNotification
                 {
                     if (connectPacket.CleanSession)
                     {
-                        _logger.Verbose("Deleting existing session of client '{0}' due to clean start", connectPacket.ClientId);
+                        _logger.Verbose(connectPacket.ClientId, "Deleting existing session of client '{0}' due to clean start", connectPacket.ClientId);
                         _subscriberSessions.Remove(oldSession);
                         session = CreateSession(connectPacket, validatingConnectionEventArgs);
                     }
                     else
                     {
-                        _logger.Verbose("Reusing existing session of client '{0}'", connectPacket.ClientId);
+                        _logger.Verbose(connectPacket.ClientId, "Reusing existing session of client '{0}'", connectPacket.ClientId);
                         session = oldSession;
                         oldSession = null;
 
@@ -635,7 +635,7 @@ public sealed class MqttClientSessionsManager : ISubscriptionChangedNotification
 
     MqttSession CreateSession(MqttConnectPacket connectPacket, ValidatingConnectionEventArgs validatingConnectionEventArgs)
     {
-        _logger.Verbose("Created new session for client '{0}'", connectPacket.ClientId);
+        _logger.Verbose(connectPacket.ClientId, "Created new session for client '{0}'", connectPacket.ClientId);
 
         return new MqttSession(connectPacket, validatingConnectionEventArgs.SessionItems, _options, _eventContainer, _retainedMessagesManager, this);
     }
@@ -676,7 +676,7 @@ public sealed class MqttClientSessionsManager : ISubscriptionChangedNotification
             using (var timeoutToken = new CancellationTokenSource(_options.DefaultCommunicationTimeout))
             using (var effectiveCancellationToken = CancellationTokenSource.CreateLinkedTokenSource(timeoutToken.Token, cancellationToken))
             {
-                var firstPacket = await channelAdapter.ReceivePacketAsync(effectiveCancellationToken.Token).ConfigureAwait(false);
+                var firstPacket = await channelAdapter.ReceivePacketAsync(effectiveCancellationToken.Token, "").ConfigureAwait(false);
                 if (firstPacket is MqttConnectPacket connectPacket)
                 {
                     return connectPacket;

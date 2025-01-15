@@ -30,7 +30,7 @@ public interface IMqttChannelAdapter : IDisposable
 
     Task DisconnectAsync(CancellationToken cancellationToken);
 
-    Task<MqttPacket> ReceivePacketAsync(CancellationToken cancellationToken);
+    Task<MqttPacket> ReceivePacketAsync(CancellationToken cancellationToken, string fromClientId);
 
     void ResetStatistics();
 

@@ -65,7 +65,7 @@ public class MqttEnhancedAuthenticationEventArgs : EventArgs
 
     public async Task<ReceiveMqttEnhancedAuthenticationDataResult> ReceiveAsync(CancellationToken cancellationToken = default)
     {
-        var receivedPacket = await _channelAdapter.ReceivePacketAsync(cancellationToken).ConfigureAwait(false);
+        var receivedPacket = await _channelAdapter.ReceivePacketAsync(cancellationToken, "MqttEnhancedAuthenticationEventArgs").ConfigureAwait(false);
 
         if (receivedPacket is MqttAuthPacket authPacket)
         {

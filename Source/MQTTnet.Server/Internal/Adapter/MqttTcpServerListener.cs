@@ -107,7 +107,7 @@ namespace MQTTnet.Server.Internal.Adapter
 
                 _socket.Listen(_options.ConnectionBacklog);
 
-                _logger.Verbose("TCP listener started (Endpoint={0})", _localEndPoint);
+                _logger.Verbose("MqttTcpServerListener", "TCP listener started (Endpoint={0})", _localEndPoint);
 
                 Task.Run(() => AcceptClientConnectionsAsync(cancellationToken), cancellationToken).RunInBackground(_logger);
 
@@ -173,7 +173,7 @@ namespace MQTTnet.Server.Internal.Adapter
             {
                 remoteEndPoint = clientSocket.RemoteEndPoint;
 
-                _logger.Verbose("TCP client '{0}' accepted (Local endpoint={1})", remoteEndPoint, _localEndPoint);
+                _logger.Verbose("MqttTcpServerListener", "TCP client '{0}' accepted (Local endpoint={1})", remoteEndPoint, _localEndPoint);
 
                 clientSocket.NoDelay = _options.NoDelay;
                 stream = clientSocket.GetStream();
@@ -253,7 +253,7 @@ namespace MQTTnet.Server.Internal.Adapter
                 }
             }
 
-            _logger.Verbose("TCP client '{0}' disconnected (Local endpoint={1})", remoteEndPoint, _localEndPoint);
+            _logger.Verbose("MqttTcpServerListener", "TCP client '{0}' disconnected (Local endpoint={1})", remoteEndPoint, _localEndPoint);
         }
     }
 }

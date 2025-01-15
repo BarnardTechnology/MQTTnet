@@ -217,7 +217,7 @@ public sealed class ValidatingConnectionEventArgs : EventArgs
 
         await ChannelAdapter.SendPacketAsync(requestAuthPacket, cancellationToken).ConfigureAwait(false);
 
-        var responsePacket = await ChannelAdapter.ReceivePacketAsync(cancellationToken).ConfigureAwait(false);
+        var responsePacket = await ChannelAdapter.ReceivePacketAsync(cancellationToken, "ValidatingConnectionEventArgs").ConfigureAwait(false);
 
         if (responsePacket == null)
         {

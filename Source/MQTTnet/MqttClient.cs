@@ -512,7 +512,7 @@ public sealed class MqttClient : Disposable, IMqttClient
 
         using (var effectiveCancellationToken = CancellationTokenSource.CreateLinkedTokenSource(backgroundCancellationToken, cancellationToken))
         {
-            _logger.Verbose("Trying to connect with server '{0}'", Options.ChannelOptions);
+            _logger.Verbose("MqttClient", "Trying to connect with server '{0}'", Options.ChannelOptions);
             await channelAdapter.ConnectAsync(effectiveCancellationToken.Token).ConfigureAwait(false);
             _logger.Verbose("Connection with server established");
 
@@ -538,7 +538,7 @@ public sealed class MqttClient : Disposable, IMqttClient
         {
             if (_adapter != null)
             {
-                _logger.Verbose("Disconnecting [Timeout={0}]", Options.Timeout);
+                _logger.Verbose("MqttClient", "Disconnecting [Timeout={0}]", Options.Timeout);
 
                 using (var timeout = new CancellationTokenSource(Options.Timeout))
                 {
@@ -790,7 +790,7 @@ public sealed class MqttClient : Disposable, IMqttClient
 
     async Task<MqttPacket> Receive(CancellationToken cancellationToken)
     {
-        var packetTask = _adapter.ReceivePacketAsync(cancellationToken);
+        var packetTask = _adapter.ReceivePacketAsync(cancellationToken, "MqttClient");
 
         MqttPacket packet;
         if (packetTask.IsCompleted)
